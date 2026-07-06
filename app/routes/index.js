@@ -25,6 +25,7 @@ let users = [
 app.get("/", (req, res) => {
   res.status(200).json({
     message: "Service is up",
+    data: "Data goes here",
     metadata: {
       hostname: "localhost",
       method: "GET",
@@ -51,12 +52,12 @@ app.get("/users/:id", (req, res) => {
 //POST by ID
 app.post("/users", (req, res) => {
   const newUser = {
-    id: req.body.id,
-    name: req.body.name,
+    id: Date.now(),
+    data: req.body.data,
   };
   users.push(newUser);
   res.status(201).json({
-    messgae: "User added",
+    message: "User added",
     user: newUser,
     users: users,
   });
@@ -76,7 +77,7 @@ app.put("/users/:id", (req, res) => {
   };
   res.status(200).json({
     message: "User updated",
-    user: usrers[userIndex],
+    user: users[userIndex],
     users: users,
   });
 });
@@ -94,7 +95,7 @@ app.delete("/users/:id", (req, res) => {
 
   res.status(200).json({
     message: "User deleted",
-    deleteduser: edeletedUser[0],
+    deleteduser: deleteUser[0],
     users: users,
   });
 });
